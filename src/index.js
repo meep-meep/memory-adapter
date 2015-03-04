@@ -9,6 +9,12 @@ function MemoryAdapter() {
 }
 
 MemoryAdapter.prototype = {
+    getKeys: function getKeys() {
+        return new RSVP.Promise(function(resolve, reject) {
+            resolve(Object.keys(this._data));
+        }.bind(this));
+    },
+
     get: function get(key) {
         return new RSVP.Promise(function(resolve, reject) {
             resolve(this._data[key]);
@@ -17,7 +23,6 @@ MemoryAdapter.prototype = {
 
     set: function set(key, value) {
         return new RSVP.Promise(function(resolve, reject) {
-            console.log('mem adapter : set', key, value)
             this._data[key] = value;
             resolve(value);
         }.bind(this));
