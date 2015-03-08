@@ -29,11 +29,15 @@ MemoryAdapter.prototype = {
     },
 
     writer: function writer(qs) {
-        this._data.results.push(qs);
+        return new RSVP.Promise(function(resolve, reject) {
+            resolve(this._data.results.push(qs));
+        }.bind(this));
     },
 
     reader: function reader() {
-        return this._data.results;
+        return new RSVP.Promise(function(resolve, reject) {
+            resolve(this._data.results);
+        }.bind(this));
     }
 };
 
