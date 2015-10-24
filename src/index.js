@@ -17,6 +17,9 @@ MemoryAdapter.prototype = {
 
     get: function get(key) {
         return new RSVP.Promise(function(resolve, reject) {
+            if(!(key in this._data)) {
+                reject(new Error('Unknown key ', key));
+            }
             resolve(this._data[key]);
         }.bind(this));
     },
